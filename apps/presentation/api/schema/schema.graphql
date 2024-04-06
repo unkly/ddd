@@ -4,20 +4,31 @@ type User {
   name: String!
 }
 
-type Query {
-  users: [User!]
+type Post {
+  id: String!
+  title: String!
+  detail: String!
+  calories: Int!
+  difficulty: Int!
+  createdAt: String!
+  user: User!
 }
 
-input RegisterUserInput {
-  email: String!
-  password: String!
-  name: String!
+type PageInfo {
+  endCorsor: String
+  hasNextPage: Boolean!
+}
+
+type PostConnection {
+  edges: [Post!]!
+  pageInfo: PageInfo!
+}
+
+type Query {
+  users: [User!]
+  posts(userId: String, first: Int!, after: String): PostConnection
 }
 
 type ReturnResultPayload {
   result: Boolean!
-}
-
-type Mutation {
-  registerUser(input: RegisterUserInput!): ReturnResultPayload
 }
