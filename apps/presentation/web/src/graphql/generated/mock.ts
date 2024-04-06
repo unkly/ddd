@@ -15,25 +15,40 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  registerUser?: Maybe<ReturnResultPayload>;
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCorsor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
 };
 
+export type Post = {
+  __typename?: 'Post';
+  calories: Scalars['Int']['output'];
+  createdAt: Scalars['String']['output'];
+  detail: Scalars['String']['output'];
+  difficulty: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  user: User;
+};
 
-export type MutationRegisterUserArgs = {
-  input: RegisterUserInput;
+export type PostConnection = {
+  __typename?: 'PostConnection';
+  edges: Array<Post>;
+  pageInfo: PageInfo;
 };
 
 export type Query = {
   __typename?: 'Query';
+  posts?: Maybe<PostConnection>;
   users?: Maybe<Array<User>>;
 };
 
-export type RegisterUserInput = {
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+
+export type QueryPostsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  first: Scalars['Int']['input'];
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ReturnResultPayload = {
@@ -48,27 +63,29 @@ export type User = {
   name: Scalars['String']['output'];
 };
 
-export type RegisterUserMutationVariables = Exact<{
-  input: RegisterUserInput;
+export type PostsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']['input']>;
+  first: Scalars['Int']['input'];
+  userId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type RegisterUserMutation = { __typename?: 'Mutation', registerUser?: { __typename?: 'ReturnResultPayload', result: boolean } | null };
+export type PostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostConnection', edges: Array<{ __typename?: 'Post', calories: number, createdAt: string, detail: string, difficulty: number, id: string, title: string, user: { __typename?: 'User', email: string, id: string, name: string } }>, pageInfo: { __typename?: 'PageInfo', endCorsor?: string | null, hasNextPage: boolean } } | null };
 
 
 /**
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
- * mockRegisterUserMutation((req, res, ctx) => {
- *   const { input } = req.variables;
+ * mockPostsQuery((req, res, ctx) => {
+ *   const { after, first, userId } = req.variables;
  *   return res(
- *     ctx.data({ registerUser })
+ *     ctx.data({ posts })
  *   )
  * })
  */
-export const mockRegisterUserMutation = (resolver: Parameters<typeof graphql.mutation<RegisterUserMutation, RegisterUserMutationVariables>>[1]) =>
-  graphql.mutation<RegisterUserMutation, RegisterUserMutationVariables>(
-    'registerUser',
+export const mockPostsQuery = (resolver: Parameters<typeof graphql.query<PostsQuery, PostsQueryVariables>>[1]) =>
+  graphql.query<PostsQuery, PostsQueryVariables>(
+    'posts',
     resolver
   )

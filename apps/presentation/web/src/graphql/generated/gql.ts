@@ -13,7 +13,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation registerUser($input: RegisterUserInput!) {\n    registerUser(input: $input) {\n      result\n    }\n  }\n": types.RegisterUserDocument,
+    "\n  query posts($after: String, $first: Int!, $userId: String) {\n    posts(first: $first, userId: $userId, after: $after) {\n      edges {\n        calories\n        createdAt\n        detail\n        difficulty\n        id\n        title\n        user {\n          email\n          id\n          name\n        }\n      }\n      pageInfo {\n        endCorsor\n        hasNextPage\n      }\n    }\n  }\n": types.PostsDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation registerUser($input: RegisterUserInput!) {\n    registerUser(input: $input) {\n      result\n    }\n  }\n"): (typeof documents)["\n  mutation registerUser($input: RegisterUserInput!) {\n    registerUser(input: $input) {\n      result\n    }\n  }\n"];
+export function graphql(source: "\n  query posts($after: String, $first: Int!, $userId: String) {\n    posts(first: $first, userId: $userId, after: $after) {\n      edges {\n        calories\n        createdAt\n        detail\n        difficulty\n        id\n        title\n        user {\n          email\n          id\n          name\n        }\n      }\n      pageInfo {\n        endCorsor\n        hasNextPage\n      }\n    }\n  }\n"): (typeof documents)["\n  query posts($after: String, $first: Int!, $userId: String) {\n    posts(first: $first, userId: $userId, after: $after) {\n      edges {\n        calories\n        createdAt\n        detail\n        difficulty\n        id\n        title\n        user {\n          email\n          id\n          name\n        }\n      }\n      pageInfo {\n        endCorsor\n        hasNextPage\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

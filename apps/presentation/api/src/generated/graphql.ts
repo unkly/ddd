@@ -16,16 +16,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  registerUser?: Maybe<ReturnResultPayload>;
-};
-
-
-export type MutationRegisterUserArgs = {
-  input: RegisterUserInput;
-};
-
 export type PageInfo = {
   __typename?: 'PageInfo';
   endCorsor?: Maybe<Scalars['String']['output']>;
@@ -60,12 +50,6 @@ export type QueryPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   first: Scalars['Int']['input'];
   userId?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type RegisterUserInput = {
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  password: Scalars['String']['input'];
 };
 
 export type ReturnResultPayload = {
@@ -153,12 +137,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
-  Mutation: ResolverTypeWrapper<{}>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Post: ResolverTypeWrapper<Post>;
   PostConnection: ResolverTypeWrapper<PostConnection>;
   Query: ResolverTypeWrapper<{}>;
-  RegisterUserInput: RegisterUserInput;
   ReturnResultPayload: ResolverTypeWrapper<ReturnResultPayload>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   User: ResolverTypeWrapper<User>;
@@ -168,19 +150,13 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Int: Scalars['Int']['output'];
-  Mutation: {};
   PageInfo: PageInfo;
   Post: Post;
   PostConnection: PostConnection;
   Query: {};
-  RegisterUserInput: RegisterUserInput;
   ReturnResultPayload: ReturnResultPayload;
   String: Scalars['String']['output'];
   User: User;
-};
-
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registerUser?: Resolver<Maybe<ResolversTypes['ReturnResultPayload']>, ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
 };
 
 export type PageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = {
@@ -224,7 +200,6 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
-  Mutation?: MutationResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;
   Post?: PostResolvers<ContextType>;
   PostConnection?: PostConnectionResolvers<ContextType>;

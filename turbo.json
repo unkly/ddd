@@ -1,7 +1,18 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["NODE_ENV", "API_PORT", "DATABASE_URL"],
+  "globalEnv": [
+    "NODE_ENV",
+    "API_PORT",
+    "DATABASE_URL",
+    "NEXT_PUBLIC_USE_MOCK",
+    "AUTH0_CLIENT_ID",
+    "AUTH0_CLIENT_SECRET",
+    "NEXT_PUBLIC_AUTH0_ISSUER",
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET",
+    "NEXT_PUBLIC_API_URL"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

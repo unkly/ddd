@@ -1,8 +1,10 @@
-if (process.env.USE_MOCK) {
+import { worker } from '@/mocks/server'
+import { server } from '@/mocks/server'
+
+if (process.env.NEXT_PUBLIC_USE_MOCK) {
   if (typeof window !== 'undefined') {
-    void (async () => {
-      const { worker } = await import('@/mocks/server')
-      await worker.listen()
-    })
+    void worker.start()
+  } else {
+    void server.listen()
   }
 }

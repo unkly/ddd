@@ -3,13 +3,12 @@ import NextAuth from 'next-auth'
 declare module 'next-auth' {
   interface Session {
     user: {
-      id: string
       name: string
       mailAddress: string
     }
     accessToken: string
-    refreshToken: string
-    accessTokenExpires: string
+    idToken: string
+    expiresAt: number
   }
 
   interface User {
@@ -18,15 +17,15 @@ declare module 'next-auth' {
       mailAddress: string
     }
     accessToken: string
-    refreshToken: string
-    accessTokenExpires: string
+    idToken: string
+    expiresAt: number
   }
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
     accessToken: string
-    refreshToken: string
-    accessTokenExpires: string
+    idToken: string
+    expiresAt: number
   }
 }

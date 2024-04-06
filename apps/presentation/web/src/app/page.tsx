@@ -1,7 +1,8 @@
-export default function Main() {
+export default async function TimeLine() {
   return (
     <div>
-      <p>a</p>
+      <h1>Home</h1>
+      <p>Home page</p>
     </div>
   )
 }

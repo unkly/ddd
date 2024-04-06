@@ -1,13 +1,10 @@
 import { css } from '@emotion/react'
 import { theme } from '../../constants/theme'
 import { Button, Typography } from '@mui/material'
-import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 export const Header = () => {
   const session = useSession()
-  const router = useRouter()
-
   return (
     <header css={styles.rootContainer}>
       <Typography fontSize={24}>recipeaceful</Typography>
@@ -16,11 +13,11 @@ export const Header = () => {
           <Button
             css={styles.button}
             onClick={() => void signOut()}>
-            サインアウト
+            ログアウト
           </Button>
         ) : (
           <Button
-            onClick={() => router.push('/login')}
+            onClick={() => signIn()}
             css={styles.button}>
             ログイン
           </Button>
