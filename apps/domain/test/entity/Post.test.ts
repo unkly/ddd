@@ -21,6 +21,7 @@ describe('Post', () => {
         detail: new PostDetail('ちょー簡単な料理です。'),
         calories: new Calories(120),
         difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+        createdAt: new Date(),
         materials: [
           {
             name: new Material('卵'),
@@ -73,6 +74,7 @@ describe('Post', () => {
         detail: new PostDetail('ちょー簡単な料理です。'),
         calories: new Calories(120),
         difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+        createdAt: new Date(),
         materials: [
           {
             name: new Material('卵'),
@@ -103,6 +105,7 @@ describe('Post', () => {
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
           difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+          createdAt: new Date(),
           materials: [
             {
               name: new Material('卵'),
@@ -124,6 +127,7 @@ describe('Post', () => {
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
           difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+          createdAt: new Date(),
           materials: [],
           processes: [
             {
@@ -145,6 +149,7 @@ describe('Post', () => {
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
           difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+          createdAt: new Date(),
           materials: [
             {
               name: new Material('卵'),
@@ -173,6 +178,7 @@ describe('Post', () => {
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
           difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+          createdAt: new Date(),
           materials: [
             {
               name: new Material('卵'),
@@ -199,6 +205,7 @@ describe('Post', () => {
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
           difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
+          createdAt: new Date(),
           materials: [
             {
               name: new Material('卵'),

@@ -15,6 +15,7 @@ type Props = {
   detail: PostDetail
   calories: Calories
   difficulty: Difficulty
+  createdAt: Date
   materials: {
     name: Material
     count: number
