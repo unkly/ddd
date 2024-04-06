@@ -11,11 +11,12 @@ database: PostgreSQL
 packageManager: turborepo pnpm  
 infra: aws
 ci/cd: CircleCI
+auth: Auth0
 ddd
 
 インフラアーキテクチャ
 
-![architecture](https://github.com/unkly/recipeaceful/assets/105118423/705a4fbb-1b52-4eff-94c1-f6445256f24c)
+![architecture](https://github.com/unkly/recipeaceful/assets/105118423/17032a26-6cb1-4dca-ae10-591e7835354e)
 
 ## セットアップ
 
@@ -23,12 +24,6 @@ ddd
 2. `npm install -g pnpm && pnpm install && pnpm add -w -D turbo`
 3. `pnpm --filter database run generate && turbo build`
 4. `make run-database`
-
-## 開発の心得
-
-### turburepoでは基本的にルートディレクトリから移動しない
-
-各種ワークスペースにパッケージを追加したい場合 `pnpm --filter <projectName> add <packageName>`で追加してください
 
 ### 各種アプリの起動方法
 
