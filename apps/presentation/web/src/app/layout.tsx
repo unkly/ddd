@@ -6,7 +6,7 @@ import { Auth0Provider } from '@auth0/auth0-react'
 import '../mocks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-export default function RootLayout({ session, children }: { session: any; children: React.ReactNode }) {
+export default function RootLayout({ session, children }: { session: never; children: React.ReactNode }) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
