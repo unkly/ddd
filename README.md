@@ -12,6 +12,7 @@ packageManager: turborepo pnpm
 infra: aws
 ci/cd: CircleCI
 auth: Auth0
+design: uizard
 ddd
 
 インフラアーキテクチャ
