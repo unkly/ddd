@@ -7,7 +7,7 @@ import { Material } from '../../src/valueObject/Material'
 import { PostDetail } from '../../src/valueObject/PostDetail'
 import { PostTitle } from '../../src/valueObject/PostTitle'
 import { PostId, UserId } from '../../src/valueObject/Ulid'
-import { PostImage } from 'valueObject/PostImage'
+import { PostImage } from '../../src/valueObject/PostImage'
 
 describe('Post', () => {
   const postId = new PostId(ulid())
@@ -25,21 +25,21 @@ describe('Post', () => {
         materials: [
           {
             name: new Material('卵'),
-            count: 1
+            count: 1,
           },
           {
             name: new Material('油'),
-            count: 1
-          }
+            count: 1,
+          },
         ],
         userId: userId,
-        likes: [new UserId(ulid()), new UserId(ulid()), new UserId(ulid()), new UserId(ulid())]
+        likes: [new UserId(ulid()), new UserId(ulid()), new UserId(ulid()), new UserId(ulid())],
       })
 
       expect(entity.postId.get()).toBe(postId.get())
       expect(entity.title.get()).toBe('卵焼き')
       expect(entity.detail.get()).toBe('ちょー簡単な料理です。')
-      expect(entity.calories.get()).toBe(120)
+      expect(entity.calories?.get()).toBe(120)
       expect(entity.difficulty.get()).toBe(DIFFICULTY_KEY.EASY)
       entity.materials?.forEach((material, i) => {
         expect(material.count).toBe(entity.materials![i]?.count)
@@ -56,20 +56,21 @@ describe('Post', () => {
         postId: postId,
         title: new PostTitle('卵焼き'),
         detail: new PostDetail('ちょー簡単な料理です。'),
-        calories: new Calories(120),
+        calories: null,
         images: null,
         difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
         createdAt: new Date(),
         materials: [
           {
             name: new Material('卵'),
-            count: 1
-          }
+            count: 1,
+          },
         ],
         userId: userId,
-        likes: null
+        likes: null,
       })
 
+      expect(entity.calories).toStrictEqual(null)
       expect(entity.likes).toStrictEqual(null)
       expect(entity.likesCount).toBe(0)
     })
@@ -87,16 +88,16 @@ describe('Post', () => {
             new PostImage('data:image/png;base64,iVBOR'),
             new PostImage('data:image/png;base64,iVBOR'),
             new PostImage('data:image/png;base64,iVBOR'),
-            new PostImage('data:image/png;base64,iVBOR')
+            new PostImage('data:image/png;base64,iVBOR'),
           ],
           calories: new Calories(120),
           difficulty: new Difficulty(DIFFICULTY_KEY.EASY),
           createdAt: new Date(),
           materials: [],
           userId: userId,
-          likes: null
+          likes: null,
         })
-      ).toThrow('材料が指定されていません postId: ' + postId.get())
+      ).toThrow('投稿画像は5枚までです postId: ' + postId.get())
     })
     it('If like list include me', () => {
       expect(() =>
@@ -111,11 +112,11 @@ describe('Post', () => {
           materials: [
             {
               name: new Material('卵'),
-              count: 1
-            }
+              count: 1,
+            },
           ],
           userId: userId,
-          likes: [userId]
+          likes: [userId],
         })
       ).toThrow('自分の投稿にいいねは出来ません userId: ' + userId.get())
     })
@@ -134,11 +135,11 @@ describe('Post', () => {
           materials: [
             {
               name: new Material('卵'),
-              count: 1
-            }
+              count: 1,
+            },
           ],
           userId: userId,
-          likes: [sameId, sameId, new UserId(ulid()), new UserId(ulid()), new UserId(ulid())]
+          likes: [sameId, sameId, new UserId(ulid()), new UserId(ulid()), new UserId(ulid())],
         })
       ).toThrow('同一ユーザーに２回以上いいねされています userId: ' + userId.get())
     })

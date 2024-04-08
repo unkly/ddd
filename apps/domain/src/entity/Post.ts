@@ -12,7 +12,7 @@ type Props = {
   title: PostTitle
   detail: PostDetail
   images: PostImage[] | null
-  calories: Calories
+  calories: Calories | null
   difficulty: Difficulty
   createdAt: Date
   materials:

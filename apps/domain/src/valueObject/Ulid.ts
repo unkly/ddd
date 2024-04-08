@@ -20,3 +20,4 @@ export class NotificationId extends Ulid {}
 export class TemplateId extends Ulid {}
 export class PostId extends Ulid {}
 export class UserId extends Ulid {}
+export class CommunityId extends Ulid {}
