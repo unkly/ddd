@@ -52,6 +52,15 @@ model Post_Like {
   updatedBy String?
 }
 
+model Community {
+  communityId String @id
+  name String
+  description String
+  createdAt DateTime @default(now())
+  createdBy String
+  users String[]
+}
+
 model Mail_Template {
   mailTemplateId String @id
   actionDivision Int
