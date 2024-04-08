@@ -37,16 +37,4 @@ export const NOTIFICATION_STATUS: Record<
   2: '送信失敗'
 }
 
-export const USER_STATUS_KEY = {
-  PENDING: 0,
-  ACTIVE: 1,
-  REVOKED: 2
-}
-
-export const USER_STATUS: Record<(typeof USER_STATUS_KEY)[keyof typeof USER_STATUS_KEY], string> = {
-  0: '仮登録',
-  1: '登録済み',
-  2: '削除済み'
-}
-
 export const AWS_REGION = 'ap-northeast-1'

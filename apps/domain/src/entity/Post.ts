@@ -1,31 +1,27 @@
+import { PostImage } from 'valueObject/PostImage'
 import { Entity } from '../seed'
 import { Calories } from '../valueObject/Calories'
 import { Difficulty } from '../valueObject/Difficulty'
 import { Material } from '../valueObject/Material'
 import { PostDetail } from '../valueObject/PostDetail'
 import { PostTitle } from '../valueObject/PostTitle'
-import { ProcessDetail } from '../valueObject/ProcessDetail'
-import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
 import { PostId, UserId } from '../valueObject/Ulid'
-import { UserStatus } from '../valueObject/UserStatus'
 
 type Props = {
   postId: PostId
   title: PostTitle
   detail: PostDetail
+  images: PostImage[] | null
   calories: Calories
   difficulty: Difficulty
   createdAt: Date
-  materials: {
-    name: Material
-    count: number
-  }[]
-  processes: {
-    detail: ProcessDetail
-    image: string | null
-  }[]
+  materials:
+    | {
+        name: Material
+        count: number
+      }[]
+    | null
   userId: UserId
-  userStatus: UserStatus
   likes: UserId[] | null
 }
 
@@ -43,12 +39,6 @@ export class Post extends Entity {
   }
 
   public static validate(props: Props) {
-    // プロセスは一つ以上存在する
-    if (props.processes.length === 0) throw new Error(`プロセスが設定されていません postId: ${props.postId.get()}`)
-
-    // 材料は１種類以上存在する
-    if (props.materials.length === 0) throw new Error(`材料が指定されていません postId: ${props.postId.get()}`)
-
     if (props.likes?.length) {
       // 自分の投稿にはいいね出来ない
       if (props.likes.find((like) => like.get() === props.userId.get()))
@@ -60,8 +50,9 @@ export class Post extends Entity {
       `)
     }
 
-    if (props.userStatus.get() !== USER_STATUS_KEY.ACTIVE) {
-      throw new Error(`登録済みのユーザー以外は投稿はできません`)
+    // 画像は最大５枚まで
+    if (props.images?.length && props.images.length > 5) {
+      throw new Error(`投稿画像は5枚までです postId: ${props.postId.get()}`)
     }
   }
 
@@ -89,16 +80,8 @@ export class Post extends Entity {
     return this._props.materials
   }
 
-  get processes() {
-    return this._props.processes
-  }
-
   get userId() {
     return this._props.userId
-  }
-
-  get userStatus() {
-    return this._props.userStatus
   }
 
   get likes() {
