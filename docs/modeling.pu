@@ -1,4 +1,4 @@
-@startuml
+@startuml domein_model
 	package DomainModel {
 		package ユーザー集約 {
 			object ユーザー {
@@ -6,7 +6,6 @@
 				名前 : userName
 				メールアドレス : mailAddress
 				アイコン : userIcon
-				ステータス: userStatus
 			}
 			object フォロワー {
 				ユーザーID : userId
@@ -25,15 +24,18 @@
 				投稿ID : postId
 				タイトル : postTitle
 				説明 : postDetail
+				画像: postImage
 				カロリー : calories
 				難易度 : difficulty
 			}
 			object いいね {
 				ユーザーID : userId
 			}
-			object プロセス {
-				説明 : processDetail
-				画像 : processImage
+			object コメント {
+				ユーザーID: userId
+				コメントId: commentId
+				コメント内容: commentDetail
+				レビューレベル: reviewLevel
 			}
 			object 材料 {
 				材料名 : materialName
@@ -73,6 +75,11 @@
 		* 説明は200文字以内
 		* タイトルは40文字以内
 		* 自分の投稿は編集・削除が出来る
+		* 画像は最大5枚まで
+	end note
+
+	note left of コメント
+		* レビューレベルは良いか悪いかの二択
 	end note
 
 	note bottom of フォロワー
@@ -84,17 +91,11 @@
 		* 名前は20文字以内
 		* アイコンはなくても良い
 		* メールアドレスは重複不可
-		* ステータスは「pending・active・revoked」の３つ
 		* ステータスがactiveじゃない間はフォロー・投稿・いいねは0
 	end note
 
-	note bottom of プロセス
-		* プロセスは必ず一つ以上存在する
-		* 画像はなくてもよい
-	end note
-
 	note bottom of 材料
-		* 材料は必ず一つ以上存在する
+		* 材料は任意で記入する
 	end note
 
 	ユーザー "1" --> "0..n" フォロワー
@@ -103,4 +104,5 @@
 	投稿 "1" --> "0..n" いいね
 	投稿 "1" --> "1..n" 材料
 	投稿 "1" --> "1..n" プロセス
+	投稿 "1" --> "0..n" コメント
 @enduml
