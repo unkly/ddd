@@ -8,23 +8,8 @@ generator client {
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
-model User {
-  userId String @id
-  email String @unique
-  name String
-  icon String?
-  status Int
-  createdAt DateTime @default(now())
-  createdBy String
-  updatedAt DateTime?
-  updatedBy String?
-  likes Post_Like[]
-  follower Follower[]
-}
-
 model Follower {
   userId String @id
-  user User @relation(fields: [userId], references: [userId])
   createdAt DateTime @default(now())
   createdBy String
   updatedAt DateTime?
@@ -35,10 +20,9 @@ model Post {
   postId String @id
   title String
   detail String
-  calorie Int
+  calories Int
   difficulty Int
   materials Post_Material[]
-  process Process[]
   hearts Post_Like[]
   createdAt DateTime @default(now())
   createdBy String
@@ -67,22 +51,9 @@ model Material {
   updatedBy String?
 }
 
-model Process {
-  uuid String @id
-  text String
-  image String?
-  postId String
-  post Post @relation(fields: [postId], references: [postId])
-  createdAt DateTime @default(now())
-  createdBy String
-  updatedAt DateTime?
-  updatedBy String?
-}
-
 model Post_Like {
   postLikeId String @id
   userId String
-  user User @relation(fields: [userId], references: [userId])
   postId String
   post Post @relation(fields: [postId], references: [postId])
   createdAt DateTime @default(now())
