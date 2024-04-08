@@ -20,7 +20,7 @@ model Post {
   postId String @id
   title String
   detail String
-  calories Int
+  calories Int?
   difficulty Int
   materials Post_Material[]
   hearts Post_Like[]
