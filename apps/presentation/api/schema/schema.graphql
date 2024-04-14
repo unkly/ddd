@@ -8,10 +8,26 @@ type Post {
   id: String!
   title: String!
   detail: String!
-  calories: Int!
+  images: [String!]
+  calories: Int
   difficulty: Int!
   createdAt: String!
   user: User!
+  materials: [Material!]
+}
+
+type Material {
+  name: String!
+  count: Int!
+}
+
+type Community {
+  id: String!
+  name: String!
+  description: String!
+  createdAt: String!
+  createdBy: User!
+  users: [User!]
 }
 
 type PageInfo {
@@ -27,8 +43,29 @@ type PostConnection {
 type Query {
   users: [User!]
   posts(userId: String, first: Int!, after: String): PostConnection
+  communities: [Community!]
 }
 
 type ReturnResultPayload {
   result: Boolean!
+}
+
+input MaterialInput {
+  name: String!
+  count: Int!
+}
+
+input CreatePostInput {
+  id: String!
+  title: String!
+  detail: String!
+  images: [String!]
+  calories: Int
+  difficulty: Int!
+  userId: String!
+  materials: [MaterialInput!]
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): ReturnResultPayload
 }
