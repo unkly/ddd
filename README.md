@@ -4,8 +4,8 @@
 
 ## 技術スタック
 
-backend: GraphQL Appsync serverless framework
-frontend: NextJS GraphQL React  
+backend: GraphQL Appsync serverless framework  
+frontend: NextJS GraphQL React vanilla-extract  
 orm: Prisma  
 database: PostgreSQL  
 packageManager: turborepo pnpm  
