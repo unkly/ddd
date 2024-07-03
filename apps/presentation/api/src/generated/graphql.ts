@@ -16,6 +16,48 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Community = {
+  __typename?: 'Community';
+  createdAt: Scalars['String']['output'];
+  createdBy: User;
+  description: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  users?: Maybe<Array<User>>;
+};
+
+export type CreatePostInput = {
+  calories?: InputMaybe<Scalars['Int']['input']>;
+  detail: Scalars['String']['input'];
+  difficulty: Scalars['Int']['input'];
+  id: Scalars['String']['input'];
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
+  materials?: InputMaybe<Array<MaterialInput>>;
+  title: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
+};
+
+export type Material = {
+  __typename?: 'Material';
+  count: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type MaterialInput = {
+  count: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createPost?: Maybe<ReturnResultPayload>;
+};
+
+
+export type MutationCreatePostArgs = {
+  input: CreatePostInput;
+};
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   endCorsor?: Maybe<Scalars['String']['output']>;
@@ -24,11 +66,13 @@ export type PageInfo = {
 
 export type Post = {
   __typename?: 'Post';
-  calories: Scalars['Int']['output'];
+  calories?: Maybe<Scalars['Int']['output']>;
   createdAt: Scalars['String']['output'];
   detail: Scalars['String']['output'];
   difficulty: Scalars['Int']['output'];
   id: Scalars['String']['output'];
+  images?: Maybe<Array<Scalars['String']['output']>>;
+  materials?: Maybe<Array<Material>>;
   title: Scalars['String']['output'];
   user: User;
 };
@@ -41,6 +85,7 @@ export type PostConnection = {
 
 export type Query = {
   __typename?: 'Query';
+  communities?: Maybe<Array<Community>>;
   posts?: Maybe<PostConnection>;
   users?: Maybe<Array<User>>;
 };
@@ -136,7 +181,12 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Community: ResolverTypeWrapper<Community>;
+  CreatePostInput: CreatePostInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Material: ResolverTypeWrapper<Material>;
+  MaterialInput: MaterialInput;
+  Mutation: ResolverTypeWrapper<{}>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Post: ResolverTypeWrapper<Post>;
   PostConnection: ResolverTypeWrapper<PostConnection>;
@@ -149,7 +199,12 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  Community: Community;
+  CreatePostInput: CreatePostInput;
   Int: Scalars['Int']['output'];
+  Material: Material;
+  MaterialInput: MaterialInput;
+  Mutation: {};
   PageInfo: PageInfo;
   Post: Post;
   PostConnection: PostConnection;
@@ -159,6 +214,26 @@ export type ResolversParentTypes = {
   User: User;
 };
 
+export type CommunityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Community'] = ResolversParentTypes['Community']> = {
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdBy?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MaterialResolvers<ContextType = any, ParentType extends ResolversParentTypes['Material'] = ResolversParentTypes['Material']> = {
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createPost?: Resolver<Maybe<ResolversTypes['ReturnResultPayload']>, ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'input'>>;
+};
+
 export type PageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = {
   endCorsor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -166,11 +241,13 @@ export type PageInfoResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
-  calories?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  calories?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   detail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   difficulty?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  materials?: Resolver<Maybe<Array<ResolversTypes['Material']>>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -183,6 +260,7 @@ export type PostConnectionResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  communities?: Resolver<Maybe<Array<ResolversTypes['Community']>>, ParentType, ContextType>;
   posts?: Resolver<Maybe<ResolversTypes['PostConnection']>, ParentType, ContextType, RequireFields<QueryPostsArgs, 'first'>>;
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
 };
@@ -200,6 +278,9 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  Community?: CommunityResolvers<ContextType>;
+  Material?: MaterialResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;
   Post?: PostResolvers<ContextType>;
   PostConnection?: PostConnectionResolvers<ContextType>;

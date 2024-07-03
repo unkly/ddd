@@ -23,3 +23,24 @@ export const QUERY_POSTS = graphql(`
     }
   }
 `)
+
+export const QUERY_COMMUNITIES = graphql(`
+  query communities {
+    communities {
+      id
+      name
+      createdAt
+      createdBy {
+        name
+      }
+    }
+  }
+`)
+
+export const MUTATION_CREATE_POST = graphql(`
+  mutation createPost($input: CreatePostInput!) {
+    createPost(input: $input) {
+      result
+    }
+  }
+`)

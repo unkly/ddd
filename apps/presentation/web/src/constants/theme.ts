@@ -3,7 +3,9 @@ import { colors } from '@mui/material'
 export const theme = {
   colors: colors,
   const: {
-    themeColor: '#fcfcfc'
+    themeColor: '#fcfcfc',
+    borderColor: '#ccc',
+    test: 'black',
   },
   boxShadow: {
     0: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
@@ -15,6 +17,6 @@ export const theme = {
     6: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
     7: 'rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px',
     8: 'rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px',
-    9: 'rgba(0, 0, 0, 0.1) 0px 4px 12px'
-  }
+    9: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
+  },
 }

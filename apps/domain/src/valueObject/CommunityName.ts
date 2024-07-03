@@ -1,9 +1,9 @@
 import { PrimitiveValueObject } from '../seed'
 
 /**
- * プロセス
+ * コミュニティ名
  */
-export class ProcessDetail extends PrimitiveValueObject<string> {
+export class CommunityName extends PrimitiveValueObject<string> {
   public constructor(value: string) {
     super(value)
     this.valid(value)
@@ -14,7 +14,7 @@ export class ProcessDetail extends PrimitiveValueObject<string> {
   }
 
   protected valid(value: string) {
-    // 100文字以下
-    if (value.length > 100) throw new Error(`invalid processDetail: ${value}`)
+    // 3文字以上30文字以下
+    if (value.length < 3 || value.length > 30) throw new Error(`invalid communityName: ${value}`)
   }
 }

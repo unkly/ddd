@@ -1,8 +1,6 @@
-import { UserStatus } from '../valueObject/UserStatus'
 import { Entity } from '../seed'
 import { MailAddress } from '../valueObject/MailAddress'
 import { UserName } from '../valueObject/UserName'
-import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
 import { PostId, UserId } from '../valueObject/Ulid'
 
 type Props = {
@@ -11,7 +9,6 @@ type Props = {
   email: MailAddress
   password: string
   icon: string | null
-  status: UserStatus
   follows: UserId[] | null
   followers: UserId[] | null
   posts: PostId[] | null
@@ -53,13 +50,6 @@ export class User extends Entity {
         throw new Error(`自分をフォローは出来ません userId: ${props.userId.get()}`)
       }
     }
-
-    // ユーザーが仮登録中の場合投稿・いいね・フォローはできない
-    if (props.status.get() !== USER_STATUS_KEY.ACTIVE) {
-      if (props.follows?.length) throw new Error(`仮登録中はユーザーをフォローできません`)
-
-      if (props.posts?.length) throw new Error(`仮登録中は投稿できません`)
-    }
   }
 
   get name() {
@@ -76,10 +66,6 @@ export class User extends Entity {
 
   get icon() {
     return this._props.icon
-  }
-
-  get status() {
-    return this._props.status
   }
 
   get userId() {

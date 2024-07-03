@@ -14,6 +14,8 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 const documents = {
     "\n  query posts($after: String, $first: Int!, $userId: String) {\n    posts(first: $first, userId: $userId, after: $after) {\n      edges {\n        calories\n        createdAt\n        detail\n        difficulty\n        id\n        title\n        user {\n          email\n          id\n          name\n        }\n      }\n      pageInfo {\n        endCorsor\n        hasNextPage\n      }\n    }\n  }\n": types.PostsDocument,
+    "\n  query communities {\n    communities {\n      id\n      name\n      createdAt\n      createdBy {\n        name\n      }\n    }\n  }\n": types.CommunitiesDocument,
+    "\n  mutation createPost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      result\n    }\n  }\n": types.CreatePostDocument,
 };
 
 /**
@@ -34,6 +36,14 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query posts($after: String, $first: Int!, $userId: String) {\n    posts(first: $first, userId: $userId, after: $after) {\n      edges {\n        calories\n        createdAt\n        detail\n        difficulty\n        id\n        title\n        user {\n          email\n          id\n          name\n        }\n      }\n      pageInfo {\n        endCorsor\n        hasNextPage\n      }\n    }\n  }\n"): (typeof documents)["\n  query posts($after: String, $first: Int!, $userId: String) {\n    posts(first: $first, userId: $userId, after: $after) {\n      edges {\n        calories\n        createdAt\n        detail\n        difficulty\n        id\n        title\n        user {\n          email\n          id\n          name\n        }\n      }\n      pageInfo {\n        endCorsor\n        hasNextPage\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query communities {\n    communities {\n      id\n      name\n      createdAt\n      createdBy {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query communities {\n    communities {\n      id\n      name\n      createdAt\n      createdBy {\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation createPost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      result\n    }\n  }\n"): (typeof documents)["\n  mutation createPost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      result\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
